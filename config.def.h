@@ -34,3 +34,12 @@ static const char * text_color = "#ffffff";
 
 /* text size (must be a valid size) */
 static const char * font_name = "6x10";
+
+/*Enable blur*/
+#define BLUR
+/*Set blur radius*/
+static const int blurRadius=5;
+/*Enable Pixelation*/
+//#define PIXELATION
+/*Set pixelation radius*/
+static const int pixelSize=0;
