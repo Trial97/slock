@@ -279,18 +279,18 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 			    IsPrivateKeypadKey(ksym))
 				continue;
 			switch (ksym) {
-      case XF86XK_AudioPlay:
-      case XF86XK_AudioStop:
-      case XF86XK_AudioPrev:
-      case XF86XK_AudioNext:
-      case XF86XK_AudioRaiseVolume:
-      case XF86XK_AudioLowerVolume:
-      case XF86XK_AudioMute:
-      case XF86XK_AudioMicMute:
-      case XF86XK_MonBrightnessDown:
-      case XF86XK_MonBrightnessUp:
-        XSendEvent(dpy, DefaultRootWindow(dpy), True, KeyPressMask, &ev);
-        break;
+      			case XF86XK_AudioPlay:
+      			case XF86XK_AudioStop:
+      			case XF86XK_AudioPrev:
+      			case XF86XK_AudioNext:
+      			case XF86XK_AudioRaiseVolume:
+      			case XF86XK_AudioLowerVolume:
+      			case XF86XK_AudioMute:
+      			case XF86XK_AudioMicMute:
+      			case XF86XK_MonBrightnessDown:
+      			case XF86XK_MonBrightnessUp:
+        			XSendEvent(dpy, DefaultRootWindow(dpy), True, KeyPressMask, &ev);
+        		break;
 			case XK_Return:
 				passwd[len] = '\0';
 				errno = 0;
@@ -328,10 +328,10 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 			color = len ? (caps ? CAPS : INPUT) : (failure || failonclear ? FAILED : INIT);
 			if (running && oldc != color) {
 				for (screen = 0; screen < nscreens; screen++) {
-                    if(locks[screen]->bgmap)
+                    if(locks[screen]->bgmap && color!=FAILED)
                         XSetWindowBackgroundPixmap(dpy, locks[screen]->win, locks[screen]->bgmap);
                     else
-                        XSetWindowBackground(dpy, locks[screen]->win, locks[screen]->colors[0]);
+                        XSetWindowBackground(dpy, locks[screen]->win, locks[screen]->colors[color]);
 					XClearWindow(dpy, locks[screen]->win);
 					writemessage(dpy, locks[screen]->win, screen);
 				}
